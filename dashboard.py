@@ -28,18 +28,16 @@ FORECAST_URL: str = f"{API_BASE_URL}/forecast"
 
 
 def fetch_forecast() -> dict:
-    """Call the FastAPI /forecast endpoint and return the JSON payload.
-
-    Raises
-    ------
-    requests.HTTPError
-        If the API returns a non-2xx status code.
-    requests.ConnectionError
-        If the API server is unreachable.
-    """
-    response = requests.get(FORECAST_URL, timeout=10)
-    response.raise_for_status()
-    return response.json()
+    """Call the FastAPI /forecast endpoint and return the JSON payload."""
+    try:
+        response = requests.get(FORECAST_URL, timeout=60)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.Timeout:
+        raise requests.exceptions.ConnectionError(
+            f"Request to {FORECAST_URL} timed out. "
+            "The backend may be waking up from sleep."
+        )
 
 
 def build_chart_data(forecast: dict) -> pd.DataFrame:
@@ -104,3 +102,4 @@ def main() -> None:
 if __name__ == "__main__":
 
     main()
+
