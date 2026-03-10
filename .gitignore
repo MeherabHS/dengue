@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Forecast log (generated at runtime)
+forecast_log.csv
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
