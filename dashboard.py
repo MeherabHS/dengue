@@ -23,7 +23,7 @@ import pandas as pd
 import requests
 import streamlit as st
 
-API_BASE_URL: str = os.getenv("API_BASE_URL", "http://localhost:8000")
+API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
 FORECAST_URL: str = f"{API_BASE_URL}/forecast"
 
 
@@ -102,4 +102,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+
     main()
